@@ -60,6 +60,19 @@ COPY config/*                                       /opt/atlassian/etc/
 # install python package 
 RUN pip install jinja2
 
+
+
+# install mysql-jdbc connector
+ARG MYSQL_VERSION=8.0.31
+ENV MYSQL_DOWNLOAD_URL=https://dev.mysql.com/get/Downloads/Connector-J
+ENV MYSQL_DOWNLOAD_FILE=mysql-connector-j-$MYSQL_VERSION.tar.gz
+ENV MYSQL_CONNECTOR_FILE=mysql-connector-j-$MYSQL_VERSION.jar 
+
+RUN wget -O $CONFLUENCE_INSTALL_DIR/$MYSQL_DOWNLOAD_FILE $MYSQL_DOWNLOAD_URL/$MYSQL_DOWNLOAD_FILE
+RUN tar xzf $CONFLUENCE_INSTALL_DIR/$MYSQL_DOWNLOAD_FILE --strip=1
+RUN mv $MYSQL_CONNECTOR_FILE  $CONFLUENCE_INSTALL_DIR/lib/$MYSQL_CONNECTOR_FILE
+
+
 # hangul font
 RUN curl -o /tmp/font-install.sh https://gist.githubusercontent.com/lesstif/644b29b9fa830ec157a476707ffc4e4d/raw 
 RUN bash /tmp/font-install.sh $CONFLUENCE_INSTALL_DIR
