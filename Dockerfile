@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=ghcr.io/declue/docker_ubuntu:20.04
+ARG BASE_IMAGE=ghcr.io/declue/docker_ubuntu:22.04
 FROM $BASE_IMAGE
 
 LABEL MAINTAINER bkperio@gmail.com
